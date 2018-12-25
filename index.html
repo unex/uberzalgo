@@ -96,6 +96,17 @@
                 </div>
                 <div class="row">
                     <div class="col s4">
+                    </div>
+                    <div class="col s4">
+                        <div class="input-field no-margin">
+                            <span>Multiplier: </span>
+                            <input value="1" name="global_multi" type="number">
+                            <span>(Global)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
                         <p>
                             <input name="opt_up" type="checkbox" id="zalgo_opt_up" class="filled-in"/>
                             <label for="zalgo_opt_up">fuck up going up</label>
@@ -114,15 +125,15 @@
                     <div class="col s4">
                         <div class="input-field no-margin">
                             <span>Multiplier: </span>
-                            <input value="1" name="up_multi" type="number">
+                            <input value="0" name="up_multi" type="number">
                         </div>
                         <div class="input-field no-margin">
                             <span>Multiplier: </span>
-                            <input value="1" name="mid_multi" type="number">
+                            <input value="0" name="mid_multi" type="number">
                         </div>
                         <div class="input-field no-margin">
                             <span>Multiplier: </span>
-                            <input value="1" name="down_multi" type="number">
+                            <input value="0" name="down_multi" type="number">
                         </div>
                     </div>
                     <div class="col s4">
@@ -286,13 +297,13 @@
                     }
 
                     if(values.opt_up)
-                        for(var j=0; j<num_up * values.up_multi; j++)
+                        for(var j=0; j<num_up * (values.up_multi + values.global_multi); j++)
                             newtxt += rand_zalgo(zalgo_up);
                     if(values.opt_mid)
-                        for(var j=0; j<num_mid * values.mid_multi; j++)
+                        for(var j=0; j<num_mid * (values.mid_multi + values.global_multi); j++)
                             newtxt += rand_zalgo(zalgo_mid);
                     if(values.opt_down)
-                        for(var j=0; j<num_down * values.down_multi; j++)
+                        for(var j=0; j<num_down * (values.down_multi + values.global_multi); j++)
                             newtxt += rand_zalgo(zalgo_down);
                 }
 
