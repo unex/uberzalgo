@@ -31,6 +31,7 @@
                 border-radius: 3px;
                 background: #EEEEEE;
                 min-height: 100px;
+                cursor: pointer;
             }
 
             #zalgo_reference {
@@ -354,7 +355,19 @@
                 function() {
                     $(this).find('.zalgo_char_copy').remove();
                 })
-            })()
+            })();
+
+            (function() {
+                let clipboard = new Clipboard("#lulz_container", {
+                    text: function() {
+                        return $("#lulz_container").text()
+                    }
+                });
+
+                clipboard.on('success', function(e) {
+                    Materialize.toast('Successfully copied to clipboard', 2000)
+                });
+            })();
         </script>
     </body>
 </html>
