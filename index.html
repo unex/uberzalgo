@@ -2,35 +2,84 @@
 <html lang="en">
     <head>
         <title>UberZalgo</title>
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <style>
+            *, ::after, ::before {
+                box-sizing: border-box;
+            }
+
+            body, html {
+                margin: 0;
+                background: #212121;
+                color: #FAFAFA;
+            }
+
+            i {
+                color: #EEEEEE
+            }
+
+            textarea {
+                padding: 4px
+            }
+
+            textarea, input {
+                background: #212121;
+                color: #FAFAFA;
+                border: 1px solid #424242;
+            }
+
+            .container {
+                display: block;
+                position: relative;
+                width: 90%;
+                max-width: 80rem;
+                margin: 0 auto;
+            }
+
+            .row {
+                display: flex;
+                margin: 10px 0;
+            }
+
+            .row .column {
+                display: block;
+                padding: 0 4px;
+            }
+
+            .row .column.column-50 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+
+            .row .column.column-33 {
+                flex: 0 0 33.3333%;
+                max-width: 33.3333%;
+            }
+
             input[type=number] {
-                margin: 0;
-                height: 2.6rem;
-                width: 42px;
+                width: 64px;
             }
 
-            .no-margin {
-                margin: 0;
-            }
-
-            .input-field.no-margin {
-                margin-top: 4px;
+            #zalgo_txt {
+                display: block;
+                width: 100%;
+                height: 100%;
             }
 
             #lulz_container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                border-radius: 3px;
-                background: #EEEEEE;
+                background: #424242;
                 min-height: 100px;
+                cursor: pointer;
+            }
+
+            #zalgo_btn {
+                padding: 8px;
                 cursor: pointer;
             }
 
@@ -79,25 +128,22 @@
     <body>
         <div class='container'>
             <form id="zalgo_form" action='' name="zalgo_form">
-                <h4>UberZalgo text generator</h4>
+                <h2>UberZalgo text generator</h2>
                 <span>based on <a href='http://eeemo.net' target="_blank">eeemo.net</a> by tchouky but with more fuck</span>
                 <p></p>
                 <div class="row">
-                    <div class="col s6">
-                        <div class="input-field">
-                            <textarea id="zalgo_txt" class="materialize-textarea" name='txt'>sample rek</textarea>
-                            <label for="zalgo_txt">Zalgo</label>
-                        </div>
+                    <div class="column column-50">
+                        <textarea id="zalgo_txt" name='txt'>sample rek</textarea>
                     </div>
-                    <div class="col s6">
+                    <div class="column column-50">
                         <text id='lulz_container'></text>
                         <span id="zalgo_len"></span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s4">
+                    <div class="column column-33">
                     </div>
-                    <div class="col s4">
+                    <div class="column column-33">
                         <div class="input-field no-margin">
                             <span>Multiplier: </span>
                             <input value="1" name="global_multi" type="number" min="0">
@@ -106,65 +152,60 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s4">
-                        <p>
-                            <input name="opt_up" type="checkbox" id="zalgo_opt_up" class="filled-in"/>
-                            <label for="zalgo_opt_up">fuck up going up</label>
-                        </p>
-
-                        <p>
-                            <input  name="opt_mid" type="checkbox" id="zalgo_opt_mid" class="filled-in" CHECKED/>
-                            <label for="zalgo_opt_mid">fuck up the middle</label>
-                        </p>
-
-                        <p>
-                            <input t name="opt_down" type="checkbox" id="zalgo_opt_down" class="filled-in" CHECKED/>
-                            <label for="zalgo_opt_down">fuck up going down</label>
-                        </p>
+                    <div class="column column-33">
+                        <input name="opt_up" type="checkbox" id="zalgo_opt_up" class="filled-in"/>
+                        <label for="zalgo_opt_up">fuck up going up</label>
                     </div>
-                    <div class="col s4">
-                        <div class="input-field no-margin">
-                            <span>Multiplier: </span>
-                            <input value="0" name="up_multi" type="number" min="0">
-                        </div>
-                        <div class="input-field no-margin">
-                            <span>Multiplier: </span>
-                            <input value="0" name="mid_multi" type="number" min="0">
-                        </div>
-                        <div class="input-field no-margin">
-                            <span>Multiplier: </span>
-                            <input value="0" name="down_multi" type="number" min="0">
-                        </div>
+                    <div class="column column-33">
+                        <span>Multiplier: </span>
+                        <input value="0" name="up_multi" type="number" min="0">
                     </div>
-                    <div class="col s4">
-                        <p>
-                            <input id="zalgo_opt_mini" type="radio" name="optval" value='mini' CHECKED/>
-                            <label for="zalgo_opt_mini">mini fuck up</label>
-                        </p>
-                        <p>
-                            <input id="zalgo_opt_normal" type="radio" name="optval" value='normal'/>
-                            <label for="zalgo_opt_normal">normal fuck up</label>
-                        </p>
-                        <p>
-                            <input id="zalgo_opt_maxi" type="radio" name="optval" value='maxi'/>
-                            <label for="zalgo_opt_maxi">maxi fuck up</label>
-                        </p>
+                    <div class="column column-33">
+                        <input id="zalgo_opt_mini" type="radio" name="optval" value='mini' CHECKED/>
+                        <label for="zalgo_opt_mini">mini fuck up</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column column-33">
+                        <input name="opt_mid" type="checkbox" id="zalgo_opt_mid" class="filled-in" CHECKED/>
+                        <label for="zalgo_opt_mid">fuck up the middle</label>
+                    </div>
+                    <div class="column column-33">
+                        <span>Multiplier: </span>
+                        <input value="0" name="mid_multi" type="number" min="0">
+                    </div>
+                    <div class="column column-33">
+                        <input id="zalgo_opt_normal" type="radio" name="optval" value='normal'/>
+                        <label for="zalgo_opt_normal">normal fuck up</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column column-33">
+                        <input name="opt_down" type="checkbox" id="zalgo_opt_down" class="filled-in" CHECKED/>
+                        <label for="zalgo_opt_down">fuck up going down</label>
+                    </div>
+                    <div class="column column-33">
+                        <span>Multiplier: </span>
+                        <input value="0" name="down_multi" type="number" min="0">
+                    </div>
+                    <div class="column column-33">
+                        <input id="zalgo_opt_maxi" type="radio" name="optval" value='maxi'/>
+                        <label for="zalgo_opt_maxi">maxi fuck up</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        <button id="zalgo_btn" class="waves-effect waves-light btn" type="submit">HE COMES</button>
+                        <button id="zalgo_btn" type="submit">HE COMES</button>
                     </div>
                 </div>
             </form>
 
-            <h5>Reference Sheet</h5>
+            <h3>Reference Sheet</h3>
 
             <section id='zalgo_reference'>
             </section>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
         <script type="text/javascript">
             //============================================================
@@ -338,7 +379,7 @@
                 }
 
                 $.each(sections, function(name, characters) {
-                    $('#zalgo_reference').append('<h6>' + name + '</h6>');
+                    $('#zalgo_reference').append('<h4>' + name + '</h4>');
 
                     let container = $('<div class="zalgo_ref"></div>').appendTo('#zalgo_reference')
 
@@ -358,7 +399,7 @@
                     });
 
                     clipboard.on('success', function(e) {
-                        Materialize.toast('Successfully copied to clipboard', 2000)
+                        $(e.trigger).find('i').html('file_copy')
                     });
 
                     $('.zalgo_char_copy').click(function(){return false})
@@ -376,7 +417,14 @@
                 });
 
                 clipboard.on('success', function(e) {
-                    Materialize.toast('Successfully copied to clipboard', 2000)
+                    // this is ass
+                    let $el = $('#zalgo_len'),
+                        c = $el.html();
+
+                    $el.html(c + ' copied to clipboard')
+                    setTimeout(() => {
+                        $el.html(c);
+                    }, 2000);
                 });
             })();
         </script>
